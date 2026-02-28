@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> CSI Radar - Kontrol Paneli</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>SİNYAL RADAR SİSTEMİ <span class="v-tag">v1.0</span></h1>
+                <div class="status-box">
+                    Sistem Durumu: <span id="sys-status" class="online">AKTİF</span>
+                </div>
+            </header>
+
+            <main class="dashboard">
+                <section id="main-alert">
+                    <div id="alert-card" class="card safe">
+                    <h2>ODADAKİ DURUM</h2>
+                    <div id="status-text" class="status-large">HAREKET YOK</div>
+                    <p id="last-update">Son Tarama: Az Önce</p>
+                    </div>
+                </section>
+
+                <section class="details">
+                    <div class="card log-container">
+                        <h3>SİSTEM KAYITLARI</h3>
+                        <ul id="log-list">
+                            <li>[SİSTEM] Başlatıldı...</li>
+                            <li>[CSI] Wİ-Fİ Sinyalleri Dinleniyor...</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <script>
+            function alarmVer(durum){
+                const kart = document.getElementById('alert-card');
+                const metin = document.getElementById('status-text');
+                const logListesi = document.getElementById('log-list');
+                const yeniLog = document.createElement('li');
+                yeniLog.innerText = `[${new Date().toLocaleTimeString()}] Durum Değişti: ${durum ? 'TEHLİKE' : 'GÜVENLİ'}`;
+                logListesi.prepend(yeniLog);
+                
+                if(durum == true) {
+                    kart.classList.remove('safe');
+                    kart.classList.add('danger');
+                    metin.innerText = "DÜŞME TESPİT EDİLDİ!!!"
+                }
+                else{
+                    kart.classList.remove('danger');
+                    kart.classlist.add('safe');
+                    metin.innerText = "HAREKET YOK / GÜVENLİ"
+                }
+            }
+        </script>
+        <footer>
+            <div class="footer-content">
+                <p>© Sinyal Radar Projesi v1.0 | Teknofest Şanlıurfa</p>
+                <p class="school-tag">Diyarbakır M.T.A.L</p>
+            </div>
+        </footer>
+    </body>
+</html>
+
